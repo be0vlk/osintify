@@ -33,9 +33,10 @@ fi
 if [ ! -d "~/tools/owlculus" ]; then
   git clone https://github.com/be0vlk/owlculus.git ~/tools/owlculus
 fi
-sudo chmod +x /opt/Fast-Google-Dorks-Scan/FGDS.sh
+sudo chmod +x ~/tools/Fast-Google-Dorks-Scan/FGDS.sh
 echo "alias fgds='~/tools/Fast-Google-Dorks-Scan/FGDS.sh'" >> ~/.bash_aliases
 echo "alias owlculus='python3 ~/tools/owlculus/owlculus'" >> ~/.bash_aliases
+echo "alias update=\"{ echo '[*] Getting apt updates'; sudo apt update; sudo apt upgrade -qq -y; } && for repo in ~/tools/*; do [ -d \\\"$repo/.git\\\" ] && { repo_name=\\\$(basename \\\"$repo\\\"); printf '\\n[*] Updating %s \\n' \\$repo_name; (cd \\\"$repo\\\" && git pull); }; done\"" >> ~/.bash_aliases
 
 # Install Python packages
 pip3 install maigret shodan
