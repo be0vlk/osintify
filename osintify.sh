@@ -3,6 +3,7 @@
 set -e
 
 cd ~
+mkdir tools
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install -y python3 python3-pip bleachbit clamav git recon-ng curl wget default-jre
 
@@ -26,19 +27,19 @@ for i in "${!dpkg_links[@]}"; do
 done
 
 # Clone GitHub repos
-if [ ! -d "/opt/Fast-Google-Dorks-Scan" ]; then
-  sudo git clone https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan.git /opt/Fast-Google-Dorks-Scan
+if [ ! -d "~/tools/Fast-Google-Dorks-Scan" ]; then
+  git clone https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan.git ~/tools/Fast-Google-Dorks-Scan
 fi
-if [ ! -d "/opt/owlculus" ]; then
-  sudo git clone https://github.com/be0vlk/owlculus.git /opt/owlculus
+if [ ! -d "~/tools/owlculus" ]; then
+  git clone https://github.com/be0vlk/owlculus.git ~/tools/owlculus
 fi
 sudo chmod +x /opt/Fast-Google-Dorks-Scan/FGDS.sh
-echo "alias fgds='/opt/Fast-Google-Dorks-Scan/FGDS.sh'" >> ~/.bash_aliases
-echo "alias owlculus='python3 /opt/owlculus/owlculus'" >> ~/.bash_aliases
+echo "alias fgds='~/tools/Fast-Google-Dorks-Scan/FGDS.sh'" >> ~/.bash_aliases
+echo "alias owlculus='python3 ~/tools/owlculus/owlculus'" >> ~/.bash_aliases
 
 # Install Python packages
 pip3 install maigret shodan
-pip3 install -r /opt/owlculus/requirements.txt
+pip3 install -r ~/tools/owlculus/requirements.txt
 
 # Install Chrome extensions
 declare -A EXTlist=(
